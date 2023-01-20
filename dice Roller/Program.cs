@@ -16,12 +16,13 @@ while(RollAgain == true)
     {
         Console.WriteLine($"Roll {i} :");
         Console.WriteLine("How many sides should each die have?");
+
         while (int.TryParse(Console.ReadLine(), out input) == false)
         {
             Console.WriteLine("Invalid");
 
         }
-        if (input > 6)
+        if (input <= 0 || input > 6)
         {
             Console.WriteLine("Not a valid number");
         }
@@ -29,9 +30,12 @@ while(RollAgain == true)
         {
             int Random1 = GetRandom2(input);
             int Random2 = GetRandom2(input);
+            int Total = Random1 + Random2;
 
-            Console.WriteLine($"You rolled a {Random1} and a {Random2} {DiceOutput(Random1, Random2)}");
+            Console.WriteLine($"You rolled a {Random1} and a {Random2}");
             Console.WriteLine(SixSided(Random1, Random2));
+            Console.WriteLine(DiceOutput(Random1, Random2));
+            Console.WriteLine(getTotals(Total));
         }
 
         Console.WriteLine("Roll Again? (y/n)");
@@ -99,14 +103,7 @@ static String SixSided(int x, int y)
     {
         return "Box Cars!";
     }
-    else if(x+y == 7 || x+y == 11)
-    {
-        return "Win!";
-    }
-    else if(x+y == 2 || x+y == 3 || x+y ==12 )
-    {
-        return "Craps!";
-    }
+   
     else
     {
         return " ";
@@ -115,7 +112,21 @@ static String SixSided(int x, int y)
 Console.WriteLine(SixSided(2,1));
 
 
-
+static string getTotals(int x)
+{
+  if (x  == 7 || x  == 11)
+    {
+        return "Win!";
+    }
+    else if (x  == 2 || x  == 3 || x  == 12)
+    {
+        return "Craps!";
+    }
+    else
+    {
+        return " ";
+    }
+}
 
 
 
